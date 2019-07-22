@@ -1,0 +1,35 @@
+SHELL=/bin/bash
+
+ARCH?=rv64gc
+
+ifneq (,$(findstring rv64,$(ARCH)))
+    ELF=riscv64-unknown-elf
+endif
+RISCV=/opt/riscv/$(ARCH)
+
+gcc=$(RISCV)/bin/riscv64-unknown-elf-gcc
+g++=$(RISCV)/bin/riscv64-unknown-elf-g++
+objdump=$(RISCV)/bin/riscv64-unknown-elf-objdump
+
+spike=$(RISCV)/bin/spike
+pk=$(RISCV)/$(ELF)/bin/pk
+
+%.elf: %.c
+	$(gcc) $< -o $@
+
+%.elf.dump: %.elf
+	$(objdump) -d $< > $@
+
+.PRECIOUS: %.elf
+
+run-%: %.elf
+	$(spike) $(pk) $(word 2,$(subst -, ,$@)).elf | tee $(word 2,$(subst -, ,$@)).log
+
+trace-%: %.elf
+	$(spike) -l $(pk) $(word 2,$(subst -, ,$@)).elf >& $(word 2,$(subst -, ,$@)).trace.log
+
+debug-%: %.elf
+	$(spike) -d $(pk) $(word 2,$(subst -, ,$@)).elf
+
+clean:
+	-rm -rf *.o *.elf *.elf.dump

@@ -1,0 +1,7 @@
+bbl loader
+Hello world!
+static_array address = 1e200
+dynamic_array address = 7f7e9b18
+malloc_array1 address = 1e640
+malloc_array2 address = 1e640
+time = 0
