@@ -1,0 +1,15 @@
+include ../make.setup.in
+
+%.spike.log: %.elf
+	$(spike) $(pk) $< | tee $@
+
+%.spike.trace: %.elf
+	$(spike) -l $(pk) $< >& $@
+	gzip $@
+
+debug:
+	$(spike) -d $(pk) $(elf)
+.PHONY: debug
+
+clean-spike:
+	-rm *.spike.log *.spike.trace

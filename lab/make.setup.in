@@ -1,0 +1,13 @@
+SHELL = /bin/bash
+
+RISCV ?= /opt/riscv
+
+cc = $(RISCV)/bin/riscv64-unknown-elf-gcc
+cxx = $(RISCV)/bin/riscv64-unknown-elf-g++
+as = $(RISCV)/bin/riscv64-unknown-elf-as
+ld = $(RISCV)/bin/riscv64-unknown-elf-ld
+objdump = $(RISCV)/bin/riscv64-unknown-elf-objdump
+
+spike = $(RISCV)/bin/spike
+pk = $(RISCV)/riscv64-unknown-elf/bin/pk
+

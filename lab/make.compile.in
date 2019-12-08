@@ -1,0 +1,20 @@
+include ../make.setup.in
+
+ifeq ($(SRC_TYPE),asm)
+%.elf: %.s
+	$(as) $< -o %.o
+	$(ld) -T linker-$(SRC_TYPE).ld %.o -o $@
+endif
+
+ifeq ($(SRC_TYPE),c)
+%.elf: %.c
+	$(cc) $< -o $@
+endif
+
+%.elf.dump: %.elf
+	$(objdump) -d $< > $@
+.PRECIOUS: %.elf
+
+clean:
+	-rm -rf *.o *.elf *.elf.dump
+.PHONY: clean
