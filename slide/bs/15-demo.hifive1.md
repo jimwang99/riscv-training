@@ -1,12 +1,62 @@
-{{ title_page('@DEMO: Freedom IDE & HiFive1b board') }}
+title: @DEMO: Freedom IDE & HiFive1b board
+class: animation-fade
+layout: true
+
+<!-- This slide will serve as the base layout for all your slides -->
+
+.bottom-bar[
+RISC-V Architecture Training - Created by Jim Wang (http://phdbreak99.github.io) - Dec. 2019 - All rights Reserved
+]
 
 ---
 
-{{ toc_page('Freedom IDE', 'Emulate on QEMU', 'Run on HiFive1b board') }}
+class: impact
+
+## RISC-V ARCHITECTURE TRAINING
+
+&nbsp;
+
+# @DEMO: Freedom IDE & HiFive1b board
+
+&nbsp;
+
+Jim Wang (http://phdbreak99.github.io)
+
+Dec. 2019
+
 
 ---
 
-{{ toc() }}
+name: toc
+
+## Table of Content
+
+.col-1[
+
+&nbsp;
+
+{{content}}
+
+]
+
+.col-11[
+
+&nbsp;
+
+### Freedom IDE
+
+### Emulate on QEMU
+
+### Run on HiFive1b board
+
+]
+
+
+---
+
+template: toc
+
+### >>>>
 
 ---
 
@@ -37,7 +87,11 @@
 
 ---
 
-{{ toc() }}
+template: toc
+
+### &nbsp;
+
+### >>>>
 
 ---
 
@@ -88,7 +142,13 @@ Copyright (c) 2003-2018 Fabrice Bellard and the QEMU Project developers
 
 ---
 
-{{ toc() }}
+template: toc
+
+### &nbsp;
+
+### &nbsp;
+
+### >>>>
 
 ---
 
@@ -104,4 +164,6 @@ Copyright (c) 2003-2018 Fabrice Bellard and the QEMU Project developers
 
 ---
 
-{{ thanks() }}
+class: middle, center
+
+![](./image/thanks.jpg)

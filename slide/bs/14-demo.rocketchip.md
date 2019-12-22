@@ -1,12 +1,66 @@
-{{ title_page('Demo 4: RocketChip generator') }}
+title: Demo 4: RocketChip generator
+class: animation-fade
+layout: true
+
+<!-- This slide will serve as the base layout for all your slides -->
+
+.bottom-bar[
+RISC-V Architecture Training - Created by Jim Wang (http://phdbreak99.github.io) - Dec. 2019 - All rights Reserved
+]
 
 ---
 
-{{ toc_page('What is RocketChip generator', 'Generate CPU with RocketChip generator', 'CPU architecture exploration with RocketChip', 'Debug software on RocketChip with GDB', 'SiFive Core designer') }}
+class: impact
+
+## RISC-V ARCHITECTURE TRAINING
+
+&nbsp;
+
+# Demo 4: RocketChip generator
+
+&nbsp;
+
+Jim Wang (http://phdbreak99.github.io)
+
+Dec. 2019
+
 
 ---
 
-{{ toc() }}
+name: toc
+
+## Table of Content
+
+.col-1[
+
+&nbsp;
+
+{{content}}
+
+]
+
+.col-11[
+
+&nbsp;
+
+### What is RocketChip generator
+
+### Generate CPU with RocketChip generator
+
+### CPU architecture exploration with RocketChip
+
+### Debug software on RocketChip with GDB
+
+### SiFive Core designer
+
+]
+
+
+---
+
+template: toc
+
+### >>>>
 
 ---
 
@@ -66,7 +120,11 @@ apt install -y default-jdk
 
 ---
 
-{{ toc() }}
+template: toc
+
+### &nbsp;
+
+### >>>>
 
 ---
 
@@ -115,7 +173,13 @@ grep FAILED output/*.out
 
 ---
 
-{{ toc() }}
+template: toc
+
+### &nbsp;
+
+### &nbsp;
+
+### >>>>
 
 ---
 
@@ -187,7 +251,15 @@ grep FAILED output/*.out
 
 ---
 
-{{ toc() }}
+template: toc
+
+### &nbsp;
+
+### &nbsp;
+
+### &nbsp;
+
+### >>>>
 
 ---
 
@@ -299,7 +371,17 @@ Reading symbols from ./proj1.out...done.
 
 ---
 
-{{ toc() }}
+template: toc
+
+### &nbsp;
+
+### &nbsp;
+
+### &nbsp;
+
+### &nbsp;
+
+### >>>>
 
 ---
 
@@ -313,7 +395,10 @@ www.sifive.com
 
 ---
 
-{{ thanks() }}
+class: middle, center
+
+![](./image/thanks.jpg)
+
 
 ---
 
@@ -326,4 +411,3 @@ class: middle
 ### Run riscv-tests to verify the design is correct
 
 ### Run different benchmark programs to see performance change
-

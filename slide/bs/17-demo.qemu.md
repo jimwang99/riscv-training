@@ -1,12 +1,64 @@
-{{ title_page('@DEMO: QEMU full system emulator') }}
+title: @DEMO: QEMU full system emulator
+class: animation-fade
+layout: true
+
+<!-- This slide will serve as the base layout for all your slides -->
+
+.bottom-bar[
+RISC-V Architecture Training - Created by Jim Wang (http://phdbreak99.github.io) - Dec. 2019 - All rights Reserved
+]
 
 ---
 
-{{ toc_page('QEMU', 'Install QEMU', 'Run Freedom-E-SDK on QEMU', 'Boot 64-bit Fedora on QEMU') }}
+class: impact
+
+## RISC-V ARCHITECTURE TRAINING
+
+&nbsp;
+
+# @DEMO: QEMU full system emulator
+
+&nbsp;
+
+Jim Wang (http://phdbreak99.github.io)
+
+Dec. 2019
+
 
 ---
 
-{{ toc() }}
+name: toc
+
+## Table of Content
+
+.col-1[
+
+&nbsp;
+
+{{content}}
+
+]
+
+.col-11[
+
+&nbsp;
+
+### QEMU
+
+### Install QEMU
+
+### Run Freedom-E-SDK on QEMU
+
+### Boot 64-bit Fedora on QEMU
+
+]
+
+
+---
+
+template: toc
+
+### >>>>
 
 ---
 
@@ -48,7 +100,11 @@
 
 ---
 
-{{ toc() }}
+template: toc
+
+### &nbsp;
+
+### >>>>
 
 ---
 
@@ -78,7 +134,13 @@ cd qemu
 
 ---
 
-{{ toc() }}
+template: toc
+
+### &nbsp;
+
+### &nbsp;
+
+### >>>>
 
 ---
 
@@ -88,7 +150,15 @@ cd qemu
 
 ---
 
-{{ toc() }}
+template: toc
+
+### &nbsp;
+
+### &nbsp;
+
+### &nbsp;
+
+### >>>>
 
 ---
 
@@ -211,4 +281,6 @@ posix.uname_result(sysname='Linux', nodename='stage4.fedoraproject.org', release
 
 ---
 
-{{ thanks() }}
+class: middle, center
+
+![](./image/thanks.jpg)

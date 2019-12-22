@@ -1,14 +1,10 @@
-{{ title_page('@DEMO: PK (proxy kernel) and FESVR (front-end server)') }}
-
+---
+title: "[RISC-V Architecture Training] @DEMO: PK (proxy kernel) and FESVR (front-end server)"
+date: 2019-11-27
+categories:
+  - riscv
 ---
 
-{{ toc_page('PK and FESVR') }}
-
----
-
-{{ toc() }}
-
----
 
 ## PK and FESVRV
 
@@ -16,17 +12,13 @@
     -   For debug and system bring up
     -   PK is an abstraction of kernel that provides system services through FESVR running on host
 
-![:scale 80%](image/riscv-pk-fesvr.png)
+![pic](../image/riscv-pk-fesvr.png)
 
----
-
-## PK and FESVR (cont'd)
 
 -   PK is running on target CPU, while FESVR is running on host computer
 
-![:scale 70%](image/fesvr-diagram.png)
+![pic](../image/fesvr-diagram.png)
 
----
 
 ## PK and FESVR / code example
 
@@ -56,11 +48,9 @@ Hello world!
 fesvr::sys_exit (0x 0 0 0 0 0 0 0)
 ```
 
----
 
 ## PK and FESVR / system call
 
-.col-6[
 
 ### `tohost` and `fromhost`
 
@@ -70,18 +60,12 @@ fesvr::sys_exit (0x 0 0 0 0 0 0 0)
     -   `tohost` is written by PK, cleared by FESVR
     -   `fromhost` is written by FESVR, cleared by PK
 
-]
-
-.col-6[
 
 ### `magicmem`
 
 -   `tohost` and `fromhost` are too small to communicate real data structure. They only store the address of `magicmem`
 -   Syscall type, arguments and return values are stored in `magicmem`
 
-]
-
-.col-12[
 
 ### Syscall entry point in PK
 
@@ -91,9 +75,6 @@ fesvr::sys_exit (0x 0 0 0 0 0 0 0)
 
 `~/riscv-git/riscv-tools/riscv-isa-sim/fesvr/syscall.cc`
 
-]
-
----
 
 ## PK and FESVR / system call workflow
 
@@ -111,9 +92,6 @@ fesvr::sys_exit (0x 0 0 0 0 0 0 0)
 | Read **magicmem**                             |                                                          |
 | Write 0 to **fromhost**                       | Looping: read **fromhost** until it's 0                  |
 
-
-
----
 
 ## PK and FESVR / verification exit
 
@@ -137,13 +115,6 @@ fesvr::sys_exit (0x 0 0 0 0 0 0 0)
         ecall
 ```
 
----
-
-{{ thanks() }}
-
----
-
-class: middle, center
 
 ## @LAB: new system call
 
@@ -152,4 +123,5 @@ class: middle, center
 Read CSR of `mtime` to get system time on RISC-V CPU
 
 Need to use assembly code to get `mtime`
+
 

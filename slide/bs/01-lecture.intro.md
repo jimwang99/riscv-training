@@ -1,5 +1,4 @@
-title: [01-LECTURE]
-Introduction of RISC-V Open ISA
+title: Introduction of RISC-V Open ISA
 class: animation-fade
 layout: true
 
@@ -17,8 +16,7 @@ class: impact
 
 &nbsp;
 
-# [01-LECTURE]
-Introduction of RISC-V Open ISA
+# Introduction of RISC-V Open ISA
 
 &nbsp;
 

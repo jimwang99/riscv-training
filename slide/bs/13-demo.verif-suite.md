@@ -1,12 +1,62 @@
-{{ title_page('@DEMO: Verification suite') }}
+title: @DEMO: Verification suite
+class: animation-fade
+layout: true
+
+<!-- This slide will serve as the base layout for all your slides -->
+
+.bottom-bar[
+RISC-V Architecture Training - Created by Jim Wang (http://phdbreak99.github.io) - Dec. 2019 - All rights Reserved
+]
 
 ---
 
-{{ toc_page('riscv-tests', 'riscv-torture', 'riscv-dv') }}
+class: impact
+
+## RISC-V ARCHITECTURE TRAINING
+
+&nbsp;
+
+# @DEMO: Verification suite
+
+&nbsp;
+
+Jim Wang (http://phdbreak99.github.io)
+
+Dec. 2019
+
 
 ---
 
-{{ toc() }}
+name: toc
+
+## Table of Content
+
+.col-1[
+
+&nbsp;
+
+{{content}}
+
+]
+
+.col-11[
+
+&nbsp;
+
+### riscv-tests
+
+### riscv-torture
+
+### riscv-dv
+
+]
+
+
+---
+
+template: toc
+
+### >>>>
 
 ---
 
@@ -102,7 +152,11 @@ https://github.com/riscv/
 
 ---
 
-{{ toc() }}
+template: toc
+
+### &nbsp;
+
+### >>>>
 
 ---
 
@@ -124,7 +178,13 @@ https://github.com/ucb-bar/riscv-torture
 
 ---
 
-{{ toc() }}
+template: toc
+
+### &nbsp;
+
+### &nbsp;
+
+### >>>>
 
 ---
 
@@ -222,4 +282,6 @@ https://github.com/google/riscv-dv
 
 ---
 
-{{ thanks() }}
+class: middle, center
+
+![](./image/thanks.jpg)

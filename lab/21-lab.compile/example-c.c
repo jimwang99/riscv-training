@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include <stdio.h>
 
 uint8_t byte_matrix_a [4][4] = {
     {42,    212,    87,     145 },
@@ -35,11 +36,12 @@ int main(void) {
         for (j=0; j<4; j++) {
             result[i][j] = 0;
             for (k=0; k<4; k++) {
-                result[i][j] += byte_matrix_a[i][k] * byte_matrix_b[j][k];
+                result[i][j] += byte_matrix_a[i][k] * byte_matrix_b[k][j];
             }
 
             if (result[i][j] != ref_result[i][j]) {
                 pass = 0;
+                // printf("[%d][%d]: result=%d ref=%d\n", i, j, result[i][j], ref_result[i][j]);
             }
         }
     }

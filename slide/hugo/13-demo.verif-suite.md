@@ -1,14 +1,10 @@
-{{ title_page('@DEMO: Verification suite') }}
-
+---
+title: "[RISC-V Architecture Training] @DEMO: Verification suite"
+date: 2019-11-27
+categories:
+  - riscv
 ---
 
-{{ toc_page('riscv-tests', 'riscv-torture', 'riscv-dv') }}
-
----
-
-{{ toc() }}
-
----
 
 ## riscv-tests
 
@@ -22,7 +18,6 @@ https://github.com/riscv/
     -   Issue pass/fail signal to host machine
 -   Official compliance tests
 
----
 
 ## riscv-tests / TVM (test virtual machine)
 
@@ -36,9 +31,6 @@ https://github.com/riscv/
 -   How to enter/exit test program
 -   How to do input/output in test program
 
----
-
-## riscv-tests / TVM (test virtual machine) (cont'd)
 
 ### Some available TVM
 
@@ -53,7 +45,6 @@ https://github.com/riscv/
 | `rv64si` | RV64 supervisor-level, integer only                  |
 | `rv64sv` | RV64 supervisor-level, integer and vector            |
 
----
 
 ## riscv-tests / target environments
 
@@ -72,7 +63,6 @@ https://github.com/riscv/
 
 -   `p` is the mostly used and supported
 
----
 
 ## riscv-tests / how to use TVM?
 
@@ -87,7 +77,6 @@ https://github.com/riscv/
 
 .center[As we can see, **riscv-tests are also scalable**]
 
----
 
 ## riscv-tests / demo
 
@@ -100,11 +89,6 @@ https://github.com/riscv/
     -   Header file: `~/riscv-git/riscv-tools/riscv-tests/env/v/riscv_test.h`
         -   Entry assembly: `~/riscv-git/riscv-tools/riscv-tests/env/v/entry.S`
 
----
-
-{{ toc() }}
-
----
 
 ## riscv-torture
 
@@ -122,11 +106,6 @@ https://github.com/ucb-bar/riscv-torture
     -   Lack of switching between privilege modes
     -   Has not updated for a very long time
 
----
-
-{{ toc() }}
-
----
 
 ## riscv-dv
 
@@ -140,13 +119,11 @@ https://github.com/google/riscv-dv
     -   Support SV based coverage
 -   Use SPIKE simulator as golden reference
 
----
 
 ## riscv-dv / simulation flow
 
-![:scale 100%](image/riscv-dv-sim-diagram.png)
+![pic](../image/riscv-dv-sim-diagram.png)
 
----
 
 ## riscv-dv / interesting features
 
@@ -160,11 +137,6 @@ https://github.com/google/riscv-dv
     -   Program-level
         -   Privileged modes switching, page table, system calls
 
----
-
-## riscv-dv / interesting features (cont'd)
-
-### Randomize everything (cont'd)
 
 -   Difficulties
     -   Branch/jump
@@ -181,9 +153,6 @@ https://github.com/google/riscv-dv
     -   Page table
         -   Exception injection
 
----
-
-## riscv-dv / interesting features (cont'd)
 
 ### Architecture aware
 
@@ -198,21 +167,15 @@ https://github.com/google/riscv-dv
 
 -   Why? Because this is usually the bottleneck when use FPGA to emulate CPU.
 
----
 
 ## riscv-dv
 
-.col-6[
 ### Generator flow
-![:scale 100%](image/riscv-dv-steps.png)
-]
+![pic](../image/riscv-dv-steps.png)
 
-.col-6[
 ### memory map
-![:scale 90%](image/riscv-dv-mem-map.png)
-]
+![pic](../image/riscv-dv-mem-map.png)
 
----
 
 ## riscv-dv / limitations
 
@@ -220,6 +183,4 @@ https://github.com/google/riscv-dv
     -   Lack of various ISA subsets support
 -   Only support commercial RTL simulator 
 
----
 
-{{ thanks() }}

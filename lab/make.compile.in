@@ -1,14 +1,16 @@
 include ../make.setup.in
 
+CCOPT +=
+
 ifeq ($(SRC_TYPE),asm)
 %.elf: %.s
-	$(as) $< -o %.o
-	$(ld) -T linker-$(SRC_TYPE).ld %.o -o $@
+	$(as) $< -o $(subst .elf,.o,$@)
+	$(ld) -T linker-$(SRC_TYPE).ld $(subst .elf,.o,$@) -o $@
 endif
 
 ifeq ($(SRC_TYPE),c)
 %.elf: %.c
-	$(cc) $< -o $@
+	$(cc) $(CCOPT) $< -o $@
 endif
 
 %.elf.dump: %.elf

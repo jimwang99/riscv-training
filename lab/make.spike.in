@@ -5,7 +5,7 @@ include ../make.setup.in
 
 %.spike.trace: %.elf
 	$(spike) -l $(pk) $< >& $@
-	gzip $@
+	gzip -f $@
 
 debug:
 	$(spike) -d $(pk) $(elf)

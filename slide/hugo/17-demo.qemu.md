@@ -1,14 +1,10 @@
-{{ title_page('@DEMO: QEMU full system emulator') }}
-
+---
+title: "[RISC-V Architecture Training] @DEMO: QEMU full system emulator"
+date: 2019-11-27
+categories:
+  - riscv
 ---
 
-{{ toc_page('QEMU', 'Install QEMU', 'Run Freedom-E-SDK on QEMU', 'Boot 64-bit Fedora on QEMU') }}
-
----
-
-{{ toc() }}
-
----
 
 ## QEMU
 
@@ -18,16 +14,12 @@
         -   Good for software debugging, not for hardware debuggin
 
 
-
 | Type           | Example               | Performance                                       |
 | -------------- | --------------------- | ------------------------------------------------- |
 | Functional     | QEMU                  | 100 million to >1 billion instructions per second |
 | Trace-accurate | Spike                 | 10 to 100 million instructions per second         |
 | Cycle-accurate | Verilator/rocket-chip | 10 to 100 thousand instructions per second        |
 
----
-
-## QEMU (cont'd)
 
 ### RISC-V boards
 
@@ -46,11 +38,6 @@
 - Can boot Busybear Linux
 - Can boot Fedora Linux
 
----
-
-{{ toc() }}
-
----
 
 ## Install QEMU
 
@@ -76,21 +63,11 @@ cd qemu
 ./configure --target-list=riscv64-softmmu && make
 ```
 
----
-
-{{ toc() }}
-
----
 
 ## Run Freedom-E-SDK on QEMU
 
 > Run examples from Freedom IDE
 
----
-
-{{ toc() }}
-
----
 
 ## Boot 64-bit Fedora on QEMU
 
@@ -105,9 +82,6 @@ xzdec -d stage4-disk.img.xz > stage4-disk.img
 wget https://fedorapeople.org/groups/risc-v/disk-images/bbl
 ```
 
----
-
-## Boot 64-bit Fedora on QEMU (cont'd)
 
 ### Boot Linux `~/riscv-git/qemu/run-qemu.sh`
 
@@ -132,9 +106,6 @@ Login: root
 Password: riscv
 ```
 
----
-
-## Boot 64-bit Fedora on QEMU (cont'd)
 
 ### `uname`
 
@@ -159,9 +130,6 @@ isa     : rv64imafdcsu
 mmu     : sv48
 ```
 
----
-
-## Boot 64-bit Fedora on QEMU (cont'd)
 
 ### Hello world
 
@@ -191,9 +159,6 @@ Hello world!
 
 - 2.63x in size, because Linux version binary doesn't include system call functions
 
----
-
-## Boot 64-bit Fedora on QEMU (cont'd)
 
 ### Python
 
@@ -209,6 +174,4 @@ posix.uname_result(sysname='Linux', nodename='stage4.fedoraproject.org', release
 
 ```
 
----
 
-{{ thanks() }}

@@ -1,6 +1,5 @@
 ---
-title: "[RISC-V Architecture Training] [01-LECTURE]
-Introduction of RISC-V Open ISA"
+title: "[RISC-V Architecture Training] Introduction of RISC-V Open ISA"
 date: 2019-11-27
 categories:
   - riscv

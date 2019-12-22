@@ -1,80 +1,8 @@
-class: impact
 # Follow-up question from yesterday
 
 ## 1. What is GP's purpose?
 
 ## 2. Software breakpoint
-
----
-
-## GP (global pointer) register
-
-### GP is a pointer to global variables
-
-GP is pointing at the center of `.data` section that allows program to index to any global variables easily without the need to `auipc` every time
-
-### Example: C program uses global variables
-
-```C
-/* Global Variables: */
-Boolean         Bool_Glob;
-char            Ch_1_Glob,
-                Ch_2_Glob;
-Proc_4 () /* without parameters */ {
-  Boolean Bool_Loc;
-  Bool_Loc = Ch_1_Glob == 'A';
-  Bool_Glob = Bool_Loc | Bool_Glob;
-  Ch_2_Glob = 'B';
-} /* Proc_4 */
-```
-
----
-
-## GP (global pointer) register (cont'd)
-
-### ASM disabled GP
-
-```assembly
-0000000040400826 <Proc_4>:
-    40400826:   3fc00797                auipc   a5,0x3fc00
-    4040082a:   f777c783                lbu     a5,-137(a5) # 8000079d <Ch_1_Glob>
-    4040082e:   3fc00717                auipc   a4,0x3fc00
-    40400832:   f7272703                lw      a4,-142(a4) # 800007a0 <Bool_Glob>
-    40400836:   fbf78793                addi    a5,a5,-65
-    4040083a:   0017b793                seqz    a5,a5
-    4040083e:   8fd9                    or      a5,a5,a4
-    40400840:   3fc00717                auipc   a4,0x3fc00
-    40400844:   f6f72023                sw      a5,-160(a4) # 800007a0 <Bool_Glob>
-    40400848:   3fc00797                auipc   a5,0x3fc00
-    4040084c:   04200713                li      a4,66
-    40400850:   f4e78a23                sb      a4,-172(a5) # 8000079c <Ch_2_Glob>
-    40400854:   8082                    ret
-```
-
----
-
-## GP (global pointer) register (cont'd)
-
-### ASM enabled GP
-
-```c
-00000000400003f0 <Proc_4>:
-    400003f0:   8651c783                lbu     a5,-1947(gp) # 80001fbd <Ch_1_Glob>
-    400003f4:   8681a703                lw      a4,-1944(gp) # 80001fc0 <Bool_Glob>
-    400003f8:   fbf78793                addi    a5,a5,-65
-    400003fc:   0017b793                seqz    a5,a5
-    40000400:   00e7e7b3                or      a5,a5,a4
-    40000404:   86f1a423                sw      a5,-1944(gp) # 80001fc0 <Bool_Glob>
-    40000408:   04200713                li      a4,66
-    4000040c:   86e18223                sb      a4,-1948(gp) # 80001fbc <Ch_2_Glob>
-    40000410:   00008067                ret
-```
-
----
-
-## GP (global pointer) register (cont'd)
-
-### TP (thread pointer) is a pointer to thread-level global variables (aka thread-local storage)
 
 ---
 
@@ -136,7 +64,6 @@ t3 0000000000000000 t4 000000005d3724c0 t5 0000000000000000 t6 0000000000000000
 pc 0000000000010438 va 00000000000006e9 insn       ffffffff sr 8000000200046020
 User load segfault @ 0x00000000000006e9
 ```
----
 
 ## Software breakpoint and `EBREAK` instruction
 
@@ -166,7 +93,6 @@ Breakpoint!
 after breakpoint
 ```
 
----
 
 # Welcome to my blog 
 ### http://phdbreak99.github.io
@@ -184,6 +110,5 @@ after breakpoint
 # Welcome to connect me on LinkedIn
 
 ### https://www.linkedin.com/in/wangjun99
-
 
 

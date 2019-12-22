@@ -1,26 +1,18 @@
-{{ title_page('@DEMO: Freedom IDE & HiFive1b board') }}
-
+---
+title: "[RISC-V Architecture Training] @DEMO: Freedom IDE & HiFive1b board"
+date: 2019-11-27
+categories:
+  - riscv
 ---
 
-{{ toc_page('Freedom IDE', 'Emulate on QEMU', 'Run on HiFive1b board') }}
-
----
-
-{{ toc() }}
-
----
 
 ## Freedom IDE
 
-![:scale 80%](image/freedom-ide-screenshot.png)
+![pic](../image/freedom-ide-screenshot.png)
 
----
-
-## Freedom IDE (cont'd)
 
 ### Different targets
 
-.col-7[
 | Targets                 | Comments                                          |
 | ----------------------- | ------------------------------------------------- |
 | qemu-sifive-e31         | QEMU emulator for 32-bit E31 CPU                  |
@@ -29,17 +21,9 @@
 | sifive-hifive-unleashed | SiFive's HiFive Unleased board that support Linux |
 | sifive-hifive1          | SiFive's HiFive1 board                            |
 | sifive-hifive1-revb     | SiFive's HiFive1-RevB board                       |
-]
 
-.col-5[
-![:scale 100%](image/freedom-ide-target.png)
-]
+![pic](../image/freedom-ide-target.png)
 
----
-
-{{ toc() }}
-
----
 
 ## Emulate on QEMU
 
@@ -47,7 +31,6 @@
     -   Translate target instruction to host instruction
     -   Only functional (not trace accurate) but really fast
     -   It's good for software development, not for hardware debugging
-
 
 
 ### @DEMO: qemu-sifive-e31-sifive-welcome
@@ -86,22 +69,15 @@ Copyright (c) 2003-2018 Fabrice Bellard and the QEMU Project developers
 
 ```
 
----
-
-{{ toc() }}
-
----
 
 ## Run on HiFive1b board
 
 -   HiFive1-revb board
     -   Latest HiFive1 board with FE310
 
-![:scale 60%](image/hifive1b-board.png)
+![pic](../image/hifive1b-board.png)
 
 
 ### @DEMO: sifive-hifive1-revb-sifive-welcome
 
----
 
-{{ thanks() }}

@@ -1,5 +1,5 @@
 
-mac.elf:     file format elf64-littleriscv
+custom-inst-gcc.elf:     file format elf64-littleriscv
 
 
 Disassembly of section .text:

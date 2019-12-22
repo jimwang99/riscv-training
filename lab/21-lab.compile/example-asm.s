@@ -1,4 +1,4 @@
-# filename: ~/docker/training-code/demo-1-baremetal-example.s 
+# filename: example-asm.s 
 # function: integer matrix multiplication in-memory
 .option norvc
 .text
@@ -106,14 +106,14 @@ blt         s1, s3, __mmul_row      # row index < 4 ?
 
 #===========================================================
 .global _exit
-_exit:                          # exit: infinity loop
-# j           _exit
+_exit:
+li          a0, 0                   # return error code
 li          a1, 0
 li          a2, 0
 li          a3, 0
 li          a4, 0
 li          a5, 0
-li          a7, 93
+li          a7, 93                  # syscall for exit
 ecall
 
 

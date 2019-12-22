@@ -1,20 +1,15 @@
-{{ title_page('@DEMO: Bare-metal assembly & SPIKE simulator') }}
-
+---
+title: "[RISC-V Architecture Training] @DEMO: Bare-metal assembly & SPIKE simulator"
+date: 2019-11-27
+categories:
+  - riscv
 ---
 
-{{ toc_page('Software stack', 'GNU toolchain', 'Assembly', 'SPIKE') }}
-
----
-
-{{ toc() }}
-
----
 
 ## General software stack
 
-![:scale 100%](image/riscv-software-stack.png)
+![pic](../image/riscv-software-stack.png)
 
----
 
 ## Embedded system software stack
 
@@ -33,11 +28,6 @@ Cross-compiler
 - A compiler capable of creating executable code for a platform other than the one on which the compiler is running
 - In our case: RISC-V compiler running on top of x86
 
----
-
-{{ toc() }}
-
----
 
 ## Setup GNU toolchain for RISC-V
 
@@ -48,9 +38,6 @@ Cross-compiler
 
 > Here we choose option 1, because it's more useful in the future. You probably need to choose your own instruction subsets.
 
----
-
-## Setup GNU toolchain for RISC-V (cont'd)
 
 ### 1. Download source
 
@@ -66,7 +53,6 @@ Cross-compiler
 git clone https://github.com/riscv/riscv-gnu-toolchain --recursive
 ```
 
----
 
 ### 2. Install prerequisites
 
@@ -78,9 +64,6 @@ sudo apt-get install -y build-essential zlib1g-dev pkg-config libglib2.0-dev bin
 sudo apt-get install -y autoconf automake autotools-dev curl libmpc-dev libmpfr-dev libgmp-dev libusb-1.0-0-dev gawk build-essential bison flex texinfo gperf libtool patchutils bc zlib1g-dev device-tree-compiler pkg-config libexpat-dev
 ```
 
----
-
-## Setup GNU toolchain for RISC-V (cont'd)
 
 ### 3. Compile & install
 
@@ -101,19 +84,11 @@ make newlib -j4 # compile & install
 make report-newlib # run DejaGnu test suite (super slow)
 ```
 
----
-
-## Setup GNU toolchain for RISC-V (cont'd)
 
 ### Toolchain directory content
 
-![:scale 100%](image/riscv-gnu-toolchain-bin-files.png)
+![pic](../image/riscv-gnu-toolchain-bin-files.png)
 
----
-
-{{ toc() }}
-
----
 
 ## Assembly / programmer's handbook
 
@@ -134,7 +109,6 @@ make report-newlib # run DejaGnu test suite (super slow)
 
 Separation of saved registers and temporary registers makes it possible to reduce 32 registers to 16 registers in E extension
 
----
 
 ## Assembly / what is ABI?
 
@@ -149,14 +123,12 @@ ABI (application binary interface) includes:
 - How to make system calls to operating system
     - More details in our next DEMO
 
----
 
 ### Assembly / `ra` return address
 
 -   `ecall`: `ra <= PC + 4`
 -   `ret`: jump back to `ra` (`PC <= ra`)
 
----
 
 ## Assembly / `sp` stack pointer
 
@@ -183,7 +155,6 @@ When goes into function call, save registers to stack
     115f8:       8082                    ret                    # return
 ```
 
----
 
 ## Assembly / `gp` global pointer
 
@@ -205,9 +176,6 @@ Proc_4 () /* without parameters */ {
 } /* Proc_4 */
 ```
 
----
-
-## Assembly / `gp` global pointer (cont'd)
 
 ### ASM disabled GP
 
@@ -228,11 +196,6 @@ Proc_4 () /* without parameters */ {
     40400854:   8082                    ret
 ```
 
----
-
-## Assembly / `gp` global pointer (cont'd)
-
-### ASM enabled GP (cont'd)
 
 ```c
 00000000400003f0 <Proc_4>:
@@ -247,13 +210,11 @@ Proc_4 () /* without parameters */ {
     40000410:   00008067                ret
 ```
 
----
 
 ## Assembly / `tp` thread pointer
 
 `tp` (thread pointer) is a pointer to thread-level global variables (aka thread-local storage)
 
----
 
 ## Assembly / code example
 
@@ -274,7 +235,6 @@ Proc_4 () /* without parameters */ {
 - Assembly code is much harder to write and debug for normal functionality
 - Assembly code's binary size is smaller (6624 bytes vs. 6000 bytes)
 
----
 
 ## Assembly / what is linker script?
 
@@ -290,7 +250,6 @@ Proc_4 () /* without parameters */ {
 - `.bss`: uninitialized global or static variables, will be initialized to zero during startup
     - `.noinit`: part of bss but will not be initialized to zero
 
----
 
 ## Assembly / compile assembly
 
@@ -307,7 +266,6 @@ ${RISCV}/bin/riscv64-unknown-elf-objdump -D example-asm.elf > example-asm.elf.du
 
 ### Linker script
 
-.col-6[
 ```bsp
 SECTIONS
 {
@@ -318,14 +276,10 @@ SECTIONS
 
 ENTRY (_start)
 ```
-]
 
-.col-6[
 - Both code and data start from `0x0001_0000`
 - `_start` is the entry point label
-]
 
----
 
 ## Assembly / compile C code
 
@@ -338,7 +292,6 @@ ${RISCV}/bin/riscv64-unknown-elf-gcc example-c.c -o example-c.elf
 ${RISCV}/bin/riscv64-unknown-elf-objdump -D example-c.elf > example-c.elf.dump
 ```
 
----
 
 ## Assembly / ASM vs. C
 
@@ -363,11 +316,6 @@ Without `printf` and turn on `-Os`: 107.2%
 -rwxr-xr-x 1 1380539737 1876110778 6432 Dec  7 17:30 example-c.elf*
 ```
 
----
-
-{{ toc() }}
-
----
 
 ## SPIKE
 
@@ -389,9 +337,6 @@ Without `printf` and turn on `-Os`: 107.2%
 > ${RISCV}/bin/spike -l target.elf 2>&1 | less
 ```
 
----
-
-## SPIKE (cont'd)
 
 ### SPIKE interactive debug mode
 
@@ -404,9 +349,6 @@ More commands type `help` under interactive debug mode
 
 > Note: don't forget the "0" for core 0
 
----
-
-## SPIKE (cont'd)
 
 ### @DEMO
 
@@ -416,18 +358,13 @@ More commands type `help` under interactive debug mode
     - Set breakpoint
 - Run SPIKE with log dumping
 
----
-
-{{ thanks() }}
 
 .footnote[Next session: LAB] 
 
----
-
-class: middle, center
 
 ## @LAB: factorial in assembly
 
 ### Use assembly to implement factorial function
 ### `n! = n * (n-1) * (n-2) * ... * 2 * 1`
+
 

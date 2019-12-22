@@ -1,14 +1,10 @@
-{{ title_page('@DEMO: Create custom instructions') }}
-
+---
+title: "[RISC-V Architecture Training] @DEMO: Create custom instructions"
+date: 2019-11-27
+categories:
+  - riscv
 ---
 
-{{ toc_page('Custom instruction', 'Instruction encoding', 'Binutils', 'SPIKE', 'GCC') }}
-
----
-
-{{ toc() }}
-
----
 
 ## Custom instruction
 
@@ -26,7 +22,6 @@
     - Multiple load/store fusion for smaller code footprint
     - Customized vector operations tailored for your application
 
----
 
 ## Custom instruction / Difficulties
 
@@ -36,7 +31,6 @@
 - For example, automatic vectorization is difficult with vector/SIMD instructions
     - The compiler has to understand the `for` loop, as well as the implemention details
 
----
 
 ## @DEMO: new MAC instruction
 
@@ -45,9 +39,6 @@
     -   `RD = RD + RS1 * RS2`
 -   Most common operations in matrix multiplication
 
----
-
-## @DEMO: new MAC instruction (cont'd)
 
 ### How to handle Overflow?
 
@@ -61,33 +52,26 @@
     -   Just like `add` and `sub`
     -   Choose this approach in this demo
 
----
-
-{{ toc() }}
-
----
 
 ## @DEMO / Select instruction encoding
 
 ### Which format?
 
-![:scale 80%](image/instruction-formats.png)
+![pic](../image/instruction-formats.png)
 
 -   Type R: because we need all `rd`, `rs1` and `rs2` while no immediate number
 
----
 
 ## @DEMO / Select instruction encoding
 
 ### Which opcode?
 
-![:scale 80%](image/opcode-map.png)
+![pic](../image/opcode-map.png)
 
 -   We can use custom-0: `inst[6:2] = 0b00010 = 0x02` while `inst[1:0] = 0b11` as always for 32-bit instruction
 
 -   `funct3 = 0b000` and `funct7 = 0b0000000`
 
----
 
 ## @DEMO / GNU toolchain support
 
@@ -103,11 +87,6 @@
     - Easy to use but hard to control
     - Compiler is not that intelligent
 
----
-
-{{ toc() }}
-
----
 
 ## @DEMO / Binutils
 
@@ -133,7 +112,6 @@ Generate opcode:
 DECLARE_INSN(custom0_madd_s, MATCH_CUSTOM0_MADD_S, MASK_CUSTOM0_MADD_S)
 ```
 
----
 
 ## @DEMO / Binutils
 
@@ -149,7 +127,6 @@ Here lower case `d,s,t,r` means GPR registers as destination, source, target, re
 
 .footnote[This is the only integer instruction that has 4 operands: 3 inputs and 1 output]
 
----
 
 ## @DEMO / Binutils
 
@@ -167,7 +144,6 @@ for (; *d != '\0'; d++) {
      ...
 ```
 
----
 
 ## @DEMO / Binutils
 
@@ -183,7 +159,6 @@ for (; *d != '\0'; d++) {
 > make -j6 | tee log
 ```
 
----
 
 ## @LAB: Try it out with new GCC assembler
 
@@ -215,9 +190,6 @@ int main(void) {
 }
 ```
 
----
-
-## @DEMO: Try it out with new GCC assembler (cont'd)
 
 ### With old GCC
 
@@ -247,11 +219,6 @@ make[2]: Leaving directory '/mnt/hgfs/riscv-training/lab/26-lab.custom-inst'
 make[1]: Leaving directory '/mnt/hgfs/riscv-training/lab/26-lab.custom-inst'
 ```
 
----
-
-{{ toc() }}
-
----
 
 ## @DEMO / SPIKE
 
@@ -269,9 +236,6 @@ cp new-encoding.h ~/riscv-git/riscv-tools/riscv-isa-sim/riscv/encoding.h
 cp new-encoding.h ~/riscv-git/riscv-tools/riscv-isa-sim/fesvr/encoding.h
 ```
 
----
-
-## @DEMO / SPIKE (cont'd)
 
 ### New instruction heading file
 
@@ -293,17 +257,11 @@ To support using `RS3` as the 3rd source register, we need to change `~/riscv-gi
 #define RS3 READ_REG(insn.rs3())
 ```
 
----
-
-## @DEMO / SPIKE (cont'd)
 
 ### Add new instruction to `riscv_insn_list` inside file:
 
 `~/riscv-git/riscv-tools/riscv-isa-sim/riscv/riscv.mk.in`
 
----
-
-## @DEMO / SPIKE (cont'd)
 
 ### Add to SPIKE disassember
 
@@ -332,9 +290,6 @@ disassembler_t::disassembler_t(int xlen)
 }
 ```
 
----
-
-## @DEMO / SPIKE (cont'd)
 
 ### Compile SPIKE
 ```shell
@@ -343,9 +298,6 @@ source ~/docker/dev/riscv.sh/rv64i-custom.sh
 ./build-spike-only.sh
 ```
 
----
-
-## @DEMO / SPIKE (cont'd)
 
 ### Try it out with old SPIKE
 
@@ -366,9 +318,6 @@ pc 0000000000010228 va 0000000068e7f78b insn       68e7f78b sr 8000000200046020
 *An illegal instruction was executed!
 ```
 
----
-
-## @DEMO / SPIKE (cont'd)
 
 ### Try it out with new SPIKE
 
@@ -393,11 +342,6 @@ fesvr::sys_write (0x 1 8082b8f0 6 0 0 0 0)
 fesvr::sys_exit (0x 0 0 0 0 0 0 0)
 ```
 
----
-
-{{ toc() }}
-
----
 
 ## @DEMO / GCC
 
@@ -421,9 +365,6 @@ Only use assembly is not enough, we need GCC to automatically generate new instr
 )
 ```
 
----
-
-## @DEMO / GCC (cont'd)
 
 ### Define new instruction
 
@@ -436,9 +377,6 @@ Only use assembly is not enough, we need GCC to automatically generate new instr
 
 Reference at [Introduction to Machine Description](./pdf/Introduction-to-Machine-Description-in-GCC.pdf)
 
----
-
-## @DEMO / GCC (cont'd)
 
 ### Recompile GCC
 
@@ -448,9 +386,6 @@ Reference at [Introduction to Machine Description](./pdf/Introduction-to-Machine
 > make -j6 | tee log
 ```
 
----
-
-## @DEMO / GCC (cont'd)
 
 ### Source code
 
@@ -465,9 +400,6 @@ Reference at [Introduction to Machine Description](./pdf/Introduction-to-Machine
     }
 ```
 
----
-
-## @DEMO / GCC (cont'd)
 
 ### Try it out without GCC support
 
@@ -488,9 +420,6 @@ bbl loader
 @PASS
 ```
 
----
-
-## @DEMO / GCC (cont'd)
 
 ### Try it out with GCC support
 
@@ -524,9 +453,6 @@ fesvr::sys_write (0x 1 8083a570 6 0 0 0 0)
 fesvr::sys_exit (0x 0 0 0 0 0 0 0)
 ```
 
----
-
-## @DEMO / GCC (cont'd)
 
 ### Compare the deassembled code
 
@@ -544,16 +470,10 @@ fesvr::sys_exit (0x 0 0 0 0 0 0 0)
        0
 ```
 
----
-
-{{ thanks() }}
-
----
-
-class: middle, center
 
 ## @LAB: custom instruction
 
 ### Create custom instruction to implement Sigmoid
 
 $$S(x)=1/(1+e^{-x})=e/(e^x+1)$$
+

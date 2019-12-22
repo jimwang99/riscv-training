@@ -1,12 +1,64 @@
-{{ title_page('@DEMO: Bare-metal assembly & SPIKE simulator') }}
+title: @DEMO: Bare-metal assembly & SPIKE simulator
+class: animation-fade
+layout: true
+
+<!-- This slide will serve as the base layout for all your slides -->
+
+.bottom-bar[
+RISC-V Architecture Training - Created by Jim Wang (http://phdbreak99.github.io) - Dec. 2019 - All rights Reserved
+]
 
 ---
 
-{{ toc_page('Software stack', 'GNU toolchain', 'Assembly', 'SPIKE') }}
+class: impact
+
+## RISC-V ARCHITECTURE TRAINING
+
+&nbsp;
+
+# @DEMO: Bare-metal assembly & SPIKE simulator
+
+&nbsp;
+
+Jim Wang (http://phdbreak99.github.io)
+
+Dec. 2019
+
 
 ---
 
-{{ toc() }}
+name: toc
+
+## Table of Content
+
+.col-1[
+
+&nbsp;
+
+{{content}}
+
+]
+
+.col-11[
+
+&nbsp;
+
+### Software stack
+
+### GNU toolchain
+
+### Assembly
+
+### SPIKE
+
+]
+
+
+---
+
+template: toc
+
+### >>>>
 
 ---
 
@@ -35,7 +87,11 @@ Cross-compiler
 
 ---
 
-{{ toc() }}
+template: toc
+
+### &nbsp;
+
+### >>>>
 
 ---
 
@@ -111,7 +167,13 @@ make report-newlib # run DejaGnu test suite (super slow)
 
 ---
 
-{{ toc() }}
+template: toc
+
+### &nbsp;
+
+### &nbsp;
+
+### >>>>
 
 ---
 
@@ -365,7 +427,15 @@ Without `printf` and turn on `-Os`: 107.2%
 
 ---
 
-{{ toc() }}
+template: toc
+
+### &nbsp;
+
+### &nbsp;
+
+### &nbsp;
+
+### >>>>
 
 ---
 
@@ -418,7 +488,10 @@ More commands type `help` under interactive debug mode
 
 ---
 
-{{ thanks() }}
+class: middle, center
+
+![](./image/thanks.jpg)
+
 
 .footnote[Next session: LAB] 
 
@@ -430,4 +503,3 @@ class: middle, center
 
 ### Use assembly to implement factorial function
 ### `n! = n * (n-1) * (n-2) * ... * 2 * 1`
-

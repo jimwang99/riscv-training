@@ -56,7 +56,7 @@ class: middle
 
 - **[Demo] Compile assembly code and simulate on SPIKE**
     - GNU toolchain, assembly code example, compile & link, SPIKE simulator
-- **[DIY] compile assembly code and simulate on SPIKE**
+- **[Lab] compile assembly code and simulate on SPIKE**
     - Code your own assembly code, compile & link, run simulation on SPIKE
 - *==== Tea break ====*
 
@@ -64,7 +64,7 @@ class: middle
     - Privilege modes, exception & interrupt, physical memory & virtual memory
 - **[Demo] C code with proxy kernel and front-end server**
     - RISC-V sim env components, system call workflow, use PK to run "hello world" in SPIKE
-- **[Lab] create new system call**
+- **[Lab] create new system call (optional)**
     - Change FESVR and PK to add a new system call, write C code to call this system call
 
 ---
@@ -92,11 +92,15 @@ class: middle
     - TileLink, PLIC, CLINT, CLIC, debug, trace
 - **[Demo] create custom instruction**
     - Select instruction encoding, change GCC to support new instruction
+- **[Lab] create custom instruction (optional)**
+    - Follow the example to create custom instruction for Sigmoid
 - *==== Tea break ====*
 - **[Demo] QEMU full system emulator**
     - Boot linux in QEMU
     - Linux binary vs. newlib binary
-
+- **[Lab] compile C code on QEMU (optional)**
+    - Boot linux and compile C code
+    
 ---
 
 ## Self-Introduction

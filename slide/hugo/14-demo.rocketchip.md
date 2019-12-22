@@ -1,18 +1,13 @@
-{{ title_page('Demo 4: RocketChip generator') }}
-
+---
+title: "[RISC-V Architecture Training] Demo 4: RocketChip generator"
+date: 2019-11-27
+categories:
+  - riscv
 ---
 
-{{ toc_page('What is RocketChip generator', 'Generate CPU with RocketChip generator', 'CPU architecture exploration with RocketChip', 'Debug software on RocketChip with GDB', 'SiFive Core designer') }}
-
----
-
-{{ toc() }}
-
----
 
 ## What is RocketChip generator?
 
-.col-6[
 
 - RISC-V **SoC** generator from UC Berekeley
 - Based on Chisel
@@ -21,13 +16,9 @@
     - Num of cores
     - Type of cores (Rocket, BOOM, w/ FPU, RoCC accelerator)
     - Num of ports (memory, system, peripheral)
-]
 
-.col-6[
-![:scale 100%](image/rocketchip-diagram.png)
-]
+![pic](../image/rocketchip-diagram.png)
 
----
 
 ## What is RocketChip generator? / Setup
 
@@ -46,7 +37,6 @@ Because RocketChip is using Chisel (a variant of Scala, based on Java), so we ne
 apt install -y default-jdk
 ```
 
----
 
 ## What is RocketChip generator? / Chisel
 
@@ -64,11 +54,6 @@ apt install -y default-jdk
 
 > If UCB had decided to use SystemVerilog + Python, RocketChip and its ECO system might be much more popular.
 
----
-
-{{ toc() }}
-
----
 
 ## Generate CPU with RocketChip generator
 
@@ -93,9 +78,6 @@ ls freechips.rocketchip.system.*.v
 
 > The generated Verilog is human unreadable. A huge problem while debug.
 
----
-
-## Generate CPU with RocketChip generator (cont'd)
 
 ### @DEMO: Simulate riscv-tests with C-based emulator
 
@@ -113,11 +95,6 @@ grep PASSED output/*.out
 grep FAILED output/*.out
 ```
 
----
-
-{{ toc() }}
-
----
 
 ## CPU architecture exploration with RocketChip
 
@@ -130,15 +107,12 @@ grep FAILED output/*.out
 
 ### What you can change
 
-.col-6[
 -   Core
     -   32-bit or 64-bit
     -   With or without FPU
     -   With or without virtual memory
     -   With or without BTB
     -   Multiplier-divider cycles
-]
-.col-6[
 -   L1 cache (I$ & D$)
     -   Num of sets
     -   Block size (set size)
@@ -147,9 +121,7 @@ grep FAILED output/*.out
     -   Num of TLB entries
 -   Cross clock domain
     -   Sync or async
-]
 
----
 
 ## CPU architecture exploration / example
 
@@ -164,11 +136,6 @@ grep FAILED output/*.out
 `~/riscv-git/rocket-chip/src/main/scala/rocket/HellaCache.scala`
 
 -   New classes of `WithNDCWay16Cores`, `WithNDCWay8Cores` and `WithNDCWay2Cores` in `~/riscv-git/rocket-chip/src/main/scala/subsystem/Configs.scala`
----
-
-## CPU architecture exploration / example (cont'd)
-
-### D-Cache: # of ways vs. Dhrystone performance (cont'd)
 
 
 | Config        | Num of ways | Microseconds for one run through Dhrystone | Dhrystones per Second |
@@ -185,11 +152,6 @@ grep FAILED output/*.out
 -   To use virtual-index in cache
     -   Parallel Cache and TLB access
 
----
-
-{{ toc() }}
-
----
 
 ## Debug software on RocketChip with GDB
 
@@ -215,9 +177,6 @@ make CONFIG=JtagConfig
 ./emulator-freechips.rocketchip.system-JtagConfig +jtag_rbb_enable=1 --rbb-port=9823 hello.elf
 ```
 
----
-
-## Debug software on RocketChip with GDB (cont'd)
 
 ### Launch OpenOCD
 
@@ -239,11 +198,6 @@ init
 halt
 ```
 
----
-
-## Debug software on RocketChip with GDB (cont'd)
-
-### Launch OpenOCD (cont'd)
 
 ```shell
 > ${RISCV}/bin/openocd -f ./cemulator.cfg
@@ -269,9 +223,6 @@ Info : Listening on port 6666 for tcl connections
 Info : Listening on port 4444 for telnet connections
 ```
 
----
-
-## Debug software on RocketChip with GDB (cont'd)
 
 ### Launch GDB
 
@@ -297,27 +248,15 @@ Reading symbols from ./proj1.out...done.
 
 > Warning: GDB running on C emulator is super slow
 
----
-
-{{ toc() }}
-
----
 
 ## SiFive Core designer
 
 www.sifive.com
 
-![:scale 45%](image/sifive-core-designer.png)
+![pic](../image/sifive-core-designer.png)
 
 .footnote[Reminder: screenshots] 
 
----
-
-{{ thanks() }}
-
----
-
-class: middle
 
 ## @LAB: RocketChip architecture exploration
 
@@ -326,4 +265,5 @@ class: middle
 ### Run riscv-tests to verify the design is correct
 
 ### Run different benchmark programs to see performance change
+
 

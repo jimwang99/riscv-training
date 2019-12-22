@@ -1,12 +1,58 @@
-{{ title_page('@DEMO: PK (proxy kernel) and FESVR (front-end server)') }}
+title: @DEMO: PK (proxy kernel) and FESVR (front-end server)
+class: animation-fade
+layout: true
+
+<!-- This slide will serve as the base layout for all your slides -->
+
+.bottom-bar[
+RISC-V Architecture Training - Created by Jim Wang (http://phdbreak99.github.io) - Dec. 2019 - All rights Reserved
+]
 
 ---
 
-{{ toc_page('PK and FESVR') }}
+class: impact
+
+## RISC-V ARCHITECTURE TRAINING
+
+&nbsp;
+
+# @DEMO: PK (proxy kernel) and FESVR (front-end server)
+
+&nbsp;
+
+Jim Wang (http://phdbreak99.github.io)
+
+Dec. 2019
+
 
 ---
 
-{{ toc() }}
+name: toc
+
+## Table of Content
+
+.col-1[
+
+&nbsp;
+
+{{content}}
+
+]
+
+.col-11[
+
+&nbsp;
+
+### PK and FESVR
+
+]
+
+
+---
+
+template: toc
+
+### >>>>
 
 ---
 
@@ -139,7 +185,10 @@ fesvr::sys_exit (0x 0 0 0 0 0 0 0)
 
 ---
 
-{{ thanks() }}
+class: middle, center
+
+![](./image/thanks.jpg)
+
 
 ---
 
@@ -152,4 +201,3 @@ class: middle, center
 Read CSR of `mtime` to get system time on RISC-V CPU
 
 Need to use assembly code to get `mtime`
-

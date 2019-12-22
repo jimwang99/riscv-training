@@ -367,11 +367,63 @@ lw      t0, 0x678(t0)   # t0 = MEM_READ(0x12345678)
 
 -   `ECALL`: trap into system call in higher privilege mode, raise *environment call* exception
     -   Normally the arguments are passed with memory, pointer is saved in `mscratch` register
--   `EBREAKPOINT`: trap into debug mode, raise *breakpoint* exception
+-   `EBREAK`: trap into debug mode, raise *breakpoint* exception
 
 -   More details in later session regarding to "system call" and "debug mode"
 
 .center[![:scale 70%](image/riscv-rv32i-system-instruction.png)]
+
+---
+
+## Software breakpoint and `EBREAK` instruction
+
+- Breakpoint is always used for software debug.
+- `EBREAK` instruction will trigger a breakpoint exception, and trap into trap handler. Then kernel will decided what to do after that.	
+
+### What does PK do?
+
+#### Example C code
+
+```c
+#include <stdio.h>
+
+int main(void) {
+    printf("before breakpoint\n");
+
+    asm volatile
+        (
+         "ebreak\n\t"
+         :
+         :
+        );
+
+    printf("after breakpoint\n");
+    return 0;
+}
+```
+
+---
+
+## Software breakpoint and `EBREAK` instruction (cont'd)
+
+Print out breakpoint info and return.
+
+```assembly
+> spike -m16 pk bp_norvc.elf
+bbl loader
+before breakpoint
+z  0000000000000000 ra 00000000000101c0 sp 0000000000fd9b40 gp 0000000000013f58
+tp 0000000000000000 t0 8800000503e80001 t1 0000000000000007 t2 000021900003000e
+s0 0000000000fd9b50 s1 0000000000000000 a0 000000000000000a a1 0000000000014770
+a2 0000000000000012 a3 0000000000000000 a4 0000000000000000 a5 0000000000000001
+a6 000000000000000a a7 0000000000000040 s2 0000000000000000 s3 0000000000000000
+s4 0000000000000000 s5 0000000000000000 s6 0000000000000000 s7 0000000000000000
+s8 0000000000000000 s9 0000000000000000 sA 0000000000000000 sB 0000000000000000
+t3 0000000000000000 t4 000000005d378e40 t5 0000000000000000 t6 0000000000000000
+pc 00000000000101c0 va 00000000000101c0 insn       ffffffff sr 8000000200046020
+Breakpoint!
+after breakpoint
+```
 
 ---
 

@@ -1,12 +1,66 @@
-{{ title_page('@DEMO: Create custom instructions') }}
+title: @DEMO: Create custom instructions
+class: animation-fade
+layout: true
+
+<!-- This slide will serve as the base layout for all your slides -->
+
+.bottom-bar[
+RISC-V Architecture Training - Created by Jim Wang (http://phdbreak99.github.io) - Dec. 2019 - All rights Reserved
+]
 
 ---
 
-{{ toc_page('Custom instruction', 'Instruction encoding', 'Binutils', 'SPIKE', 'GCC') }}
+class: impact
+
+## RISC-V ARCHITECTURE TRAINING
+
+&nbsp;
+
+# @DEMO: Create custom instructions
+
+&nbsp;
+
+Jim Wang (http://phdbreak99.github.io)
+
+Dec. 2019
+
 
 ---
 
-{{ toc() }}
+name: toc
+
+## Table of Content
+
+.col-1[
+
+&nbsp;
+
+{{content}}
+
+]
+
+.col-11[
+
+&nbsp;
+
+### Custom instruction
+
+### Instruction encoding
+
+### Binutils
+
+### SPIKE
+
+### GCC
+
+]
+
+
+---
+
+template: toc
+
+### >>>>
 
 ---
 
@@ -63,7 +117,11 @@
 
 ---
 
-{{ toc() }}
+template: toc
+
+### &nbsp;
+
+### >>>>
 
 ---
 
@@ -105,7 +163,13 @@
 
 ---
 
-{{ toc() }}
+template: toc
+
+### &nbsp;
+
+### &nbsp;
+
+### >>>>
 
 ---
 
@@ -249,7 +313,15 @@ make[1]: Leaving directory '/mnt/hgfs/riscv-training/lab/26-lab.custom-inst'
 
 ---
 
-{{ toc() }}
+template: toc
+
+### &nbsp;
+
+### &nbsp;
+
+### &nbsp;
+
+### >>>>
 
 ---
 
@@ -395,7 +467,17 @@ fesvr::sys_exit (0x 0 0 0 0 0 0 0)
 
 ---
 
-{{ toc() }}
+template: toc
+
+### &nbsp;
+
+### &nbsp;
+
+### &nbsp;
+
+### &nbsp;
+
+### >>>>
 
 ---
 
@@ -546,7 +628,10 @@ fesvr::sys_exit (0x 0 0 0 0 0 0 0)
 
 ---
 
-{{ thanks() }}
+class: middle, center
+
+![](./image/thanks.jpg)
+
 
 ---
 
