@@ -456,7 +456,7 @@ https://github.com/chipsalliance
 - SweRV
     - RISC-V CPU from Western Digital; written in SV
 - OmniXtend
-    - Network based on TileLink; written in SV?
+    - Network based on TileLink; written in SV
 
 ---
 
