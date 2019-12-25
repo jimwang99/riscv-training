@@ -144,7 +144,8 @@ IRQ-style interrupt aggregator that support **enable/priority** and **claim/comp
 
 -   Non-ARM interconnect protocol
     -   Cannot use ARM's open protocol: AMBA (CHI, ACE, AXI, AHB, APB)
-    -   They are open, but fully controlled by ARM. Huge problem for ARM's rival.
+    -   They are open, but fully controlled by ARM. Huge problem for ARM's rival ememy
+    -   Patent protection issue
 -   Protocol framework to unify different usage scenarios
     -   Clean slate, start from scratch, learn from priors
     -   Decouple message protocol from wire protocol
@@ -337,7 +338,7 @@ https://github.com/chipsalliance/rocket-chip/tree/master/src/main/scala/tilelink
 - Debugger can select one or multiple harts to debug
 
 ### Run control
-- Halt, resume, halt-on-reset, reset, singl-step
+- Halt, resume, halt-on-reset, reset, single-step
 
 
 ### Abstract commands
@@ -351,8 +352,10 @@ https://github.com/chipsalliance/rocket-chip/tree/master/src/main/scala/tilelink
 
 ### How to go into debug mode?
 - Breakpoint
-    - Also `EBREAK` instruction
-- Watchpoint: register
+    - Hardware breakpoint
+    - `EBREAK` instruction
+- Watchpoint
+    - Watch data change in register
 - Cross-trigger
     - Other core encounters a breakpoint
     - Other component hits certain condition

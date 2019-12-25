@@ -103,7 +103,7 @@ Keep custom instruction category open, and the software flow to add custom instr
     -   Unlike ARMv8-A which has AArch32 and AArch64 both compatible
     -   For hardware simplicity
         -   Optimize for its needs without requiring to support all the operations needed for other base ISA
--   But introduced some confusion
+-   But introduced some confusion, and issues for virtualization
     -   In 32-bit version, `ADD` means 32-bit add, but in 64-bit the same instruction means 64-bit add
     -   And 64-bit version has `ADDW` that support 32-bit operations
 
@@ -124,8 +124,6 @@ Hart is a very important concept in RISC-V
     -   Each hart has its own PC, GPR, CSR, interrupt, exception, and etc.
     -   But they may share the same front-end (instruction fetch and decoding), or shared ALU, LSU or accelerators
 
-
-## RISC-V Terminology
 
 ### Memory
 
@@ -148,23 +146,19 @@ Hart is a very important concept in RISC-V
     -   Fixed, not configurable like MIPS
 
 
-## RISC-V Terminology
-
 ### Exceptions, traps and interrupts
 
--   Exception: unusual conditions happened in current RISC-V hart
+-   **Exception**: unusual conditions happened in current RISC-V hart
     -   E.g. illegal instructions, divide by zero, page fault
     -   Precise exception
         - All instruction before the exception has to commit
         - All instruction after the exception cannot commit
--   Interrupt: external asynchronous event asking for RISC-V hart's attention
+-   **Interrupt**: external asynchronous event asking for RISC-V hart's attention
     -   E.g. DMA is done, keyboard input
     -   Interrupt doesn't need to be precise
--   Trap: the transfer of control to a trap handler caused by exception or interrupt
-    -   Contained trap: to higher privilege mode, e.g. `ECALL` 
-    -   Requested trap: the same privilege mode, e.g. system call
-    -   Invisible trap: transparent to software, e.g. page fault
-    -   Fatal trap: fatal failure, and causes the execution terminate, e.g. watchdog timer timeout
+&nbsp;
+-   **Trap**: the transfer of control to a trap handler caused by exception or interrupt
+    -   Contained / requested / invisible / fatal
 
 
 ## [Tips] How to download and compile latest ISA SPEC
@@ -193,13 +187,15 @@ apt-get install texlive-full
 ## RV32I / GPR (general purpose registers)
 
 -   32 GPR: x0 to x31
+    -   PC is not one of them
 -   X0 is hardwared to 0
+    -   Writing to it doesn't take any effect
     -   Very useful
         -   `NOP` is implemented as `ADDI x0, x0, 0`
 -   GPR + PC = architectural state
 -   Width: depends on 32-bit or 64-bit system
     -   `XLEN` represents data width
-        -   E.g. 32-bit system `XLEN=32`
+        -   E.g. 32-bit system `XLEN=32`, while 64-bit system `XLEN=64`
 
 .footnote[Correspondingly, `ILEN` represents instruction width. Currently, only `ILEN=32` and `ILEN=16` are defined.]
 
@@ -208,11 +204,11 @@ apt-get install texlive-full
 
 -   `ILEN = 32` instruction width = 32-bit
 -   4 base formats + 2 immediate-encoding variants
--   Very hardware friendly
+-   **Very hardware friendly**
     -   Register specifier always in the same place
     -   `opcode` are always in the same place
-        -   Also considered instruction frequency (more common, simpler opcode)
-    -   `funct3`/`funct7` are in the same place
+        -   Also considered instruction frequency (more common, simpler opcode, good for power)
+    -   `funct3` / `funct7` are in the same place
     -   Immediate is encoded considering hardware muxing overhead
 
 .center[![pic](../image/instruction-formats.png)]
@@ -226,6 +222,8 @@ apt-get install texlive-full
     -   Worse code density, but much easier hardware design
 
 .center[![pic](../image/riscv-rv32i-arithmetic-logic-instruction.png)]
+
+> I really don't think it's a good idea. More software cost, more power
 
 
 ## RV32I / memory access instruction
@@ -305,6 +303,7 @@ lw      t0, 0x678(t0)   # t0 = MEM_READ(0x12345678)
 -   `FENCE`: for memory ordering
     -   Guarantee all memory access before this instruction has already been committed to its destination.
         -   E.g. write data structure to external DRAM, then notify PCI-Express DMA to send it out through its link
+            -   Need to add `FENCE` after writing DRAM
 -   `FENCE.I`: for self-modifying code
     -   Force all memory write to commit first, then invalidate all the I-Cache entries, before resume instruction fetch.
 -   Will be discussed in later session regarding to "Memory Model"
@@ -318,7 +317,7 @@ lw      t0, 0x678(t0)   # t0 = MEM_READ(0x12345678)
 -   `CSRRS`: read then set bits, use `rs1` as bit mask, old value written into `rd`
 -   `CSRRC`: read then clear bits, use `rs1` as bit mask, old value written in to `rd`
 -   `CSRRWI/CSRRSI/CSRRCI`: meaning are the same, just use immediate as bit mask
--   **Notice**: all CSR access instruction is atomic instruction, which means it will happen in one cycle
+-   **Notice**: all CSR access instruction is atomic instruction, which means read-modify-write will happen in one cycle
 
 .center[![pic](../image/riscv-rv32i-csr-instruction.png)]
 
@@ -334,14 +333,19 @@ lw      t0, 0x678(t0)   # t0 = MEM_READ(0x12345678)
 .center[![pic](../image/riscv-rv32i-system-instruction.png)]
 
 
-## Software breakpoint and `EBREAK` instruction
+## [Extention] Software breakpoint and `EBREAK`
 
-- Breakpoint is always used for software debug.
-- `EBREAK` instruction will trigger a breakpoint exception, and trap into trap handler. Then kernel will decided what to do after that.	
+-   Breakpoint is always used for software debug.
+-   `EBREAK` instruction will trigger a breakpoint exception, and trap into trap handler. Then kernel will decided what to do after that.
 
-### What does PK do?
+### Software breakpoint
 
-#### Example C code
+-   When software breakpoint is used, debugger will replace the instruction at breakpoint to be `EBREAK`
+-   Hardware breakpoint: don't need to modify the code
+    -   Limited number
+
+
+### Example C code
 
 ```c
 #include <stdio.h>
@@ -362,7 +366,7 @@ int main(void) {
 ```
 
 
-Print out breakpoint info and return.
+### PK: print out breakpoint info and return.
 
 ```assembly
 > spike -m16 pk bp_norvc.elf
@@ -377,7 +381,7 @@ s4 0000000000000000 s5 0000000000000000 s6 0000000000000000 s7 0000000000000000
 s8 0000000000000000 s9 0000000000000000 sA 0000000000000000 sB 0000000000000000
 t3 0000000000000000 t4 000000005d378e40 t5 0000000000000000 t6 0000000000000000
 pc 00000000000101c0 va 00000000000101c0 insn       ffffffff sr 8000000200046020
-Breakpoint!
+*Breakpoint!
 after breakpoint
 ```
 
@@ -399,7 +403,7 @@ after breakpoint
         -   E.g. `ADDIW a1, a0, 1`
 -   RV128I: 128-bit data/address variant
 
->   Because they are exclusive instruction sets, need to change compiler
+>   Because they are exclusive instruction sets, need to tell compiler this information
 
 
 ## Variants
@@ -407,7 +411,7 @@ after breakpoint
 ### Instruction length variants (as ISA extension)
 
 -   RV32C (compressed): 16-bit instruction extension
--   Future: SIMD, …
+-   Future: SIMD, VLIW, graphics, …
 
 .center[![pic](../image/instruction-length-encoding.png)]
 
@@ -442,8 +446,14 @@ Other popular working-in-progress extensions
 | `div` / `divu` | `rd = rs1 / rs2`                                   |
 | `rem` / `remu` | `rd = rs1 % rs2`                                   |
 
-- Separate instruction to get higher and lower parts of multiplication result. But if do `mulh*` followed by `mul` directly, hardware does not need to redo the multiplication again.
-- The same thing applies to division results also.
+-   Separate instruction to get higher and lower parts of multiplication result.
+    -   But if do `mulh*` followed by `mul` directly, hardware does not need to redo the multiplication again.
+-   The same thing applies to division results also.
+-   Divide by zero
+    -   There is NO divide-by-zero exception
+    -   Software need to explicitly check the divisor
+
+> I also don't agree with this approach
 
 
 ## RV32A: atomic memory operation
@@ -457,7 +467,7 @@ Other popular working-in-progress extensions
 
 -   Directly send `amo*` instructions down to the memory hierarchy
     -   Easy and intuitive
-    -   Needs both network fabric and target memory hierarchy support atomic memory operation
+    -   Needs both network fabric, target device (either cache or peripherals) support atomic memory operation
     -   Cannot do too complicated operations
 
 
@@ -502,6 +512,7 @@ done:
 -   Floating-point CSR: `fcsr = {frm, fflags}`
     -	Rounding mode register (dynamic)
     -	Aggregated exception flags
+        -   However hardware will not trigger exceptions
 
 
 ## Floating-point / load & store instructions

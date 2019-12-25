@@ -149,7 +149,11 @@ CPU (Application/Real-time/eMbedded), GPU, DSP, fabric, cache, ISP, debug, etc.
 
 ## ARM's reaction to RISC-V: Flexible Access
 
+### ARM techcon in Oct. 2020
+
 ![arm-flexbile-access.png](image/arm-flexible-access.png)
+
+#### Custom instruction for M-series CPU
 
 ---
 
@@ -341,8 +345,11 @@ Recent events:
 
 -   SPIKE: golden ISA simulator
     -   Only for RISC-V
+    -   Usually used as reference for HW design
 -   QEMU: full-system simulator
     -   Used for software stack development
+-   Imperas ISS
+    -   Comercial
 
 ### Debugger
 
@@ -359,7 +366,7 @@ Recent events:
 ### Open source hardware
 
 .col-6[
-- RocketChip
+- **RocketChip**
     - The very first one from UCB
     - Not only a CPU but an SoC generator
     - Based on Chisel
@@ -373,7 +380,7 @@ Recent events:
 ]
 
 .col-6[
-- PULP (https://pulp-platform.org/)
+- **PULP** (https://pulp-platform.org/)
     - From ETH Zurich University (Switzerland)
     - Also a family of cores and full SoC system
     - Based on SystemVerilog
@@ -417,7 +424,7 @@ Recent events:
 
 ### Difference vs RISC-V Foundation
 - RISC-V is for ISA, not implementation
-- CHIPS alliance hosts implementation around RISC-V
+- CHIPS alliance hosts open source implementations and tools around RISC-V
 
 ![:scale 50%](image/chip-alliance-members.png)
 
@@ -431,14 +438,14 @@ https://github.com/chipsalliance
 
 ### Open source design
 
-- Chisel + FIRRTL
+- **Chisel + FIRRTL**
     - Agile design language and middleware
 - FuseSoC
     - Package (library) manager for hardware design
 
 ### Open source toolchain
 
-- Verilator
+- **Verilator**
     - Translate SV RTL to C++, then compile and simulate
     - Open source choice besides VCS(S)/Questa(M)/Xcelium(C)
 - Cocotb
@@ -468,6 +475,8 @@ https://github.com/chipsalliance
 
 ![:scale 50%](image/openhw-group.png)
 
+.footnote[Note: most of the in EU]
+
 ---
 
 ## Ecosystem / OpenHW group (cont'd)
@@ -477,7 +486,7 @@ https://github.com/chipsalliance
 - PULP series CPU cores from ETH Zurich
     - Based on SystemVerilog
 
-### Comercial SoC based on PULP cores
+### Commercial SoC based on PULP cores
 
 - GreenWaves: multi-core RISC-V SoC for IoT applications
 - NXP: BLE controller on RISC-V
@@ -577,7 +586,8 @@ template: toc
 ### Ecosystem
 
 - Software
-    - Open source
+    - Open source compiler and simulator
+    - Commercial ISS and formal tool
 - Hardware
     - Both open source and commercial
 - RISC-V in China

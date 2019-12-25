@@ -56,9 +56,9 @@ Pipeline simulator: https://github.com/mortbopet/Ripes
     - Dependency
 
 ```assembly
-mv	x1, x2
-add	x4, x1, x3
-sd	x4, 0(x5)
+mv      x1, x2
+add     x4, x1, x3
+sd      x4, 0(x5)
 ```
 ]
 
@@ -67,9 +67,9 @@ sd	x4, 0(x5)
     - Jump and branch
 
 ```assembly
-addi	x1, x1, 1
-subi	x2, x1, 100
-bnez	x2, 0(x3)
+addi    x1, x1, 1
+subi    x2, x1, 100
+bnez    x2, 0(x3)
 ```
 ]
 
@@ -78,9 +78,9 @@ bnez	x2, 0(x3)
     - Multi-cycle multiplier
 
 ```assembly
-mul		x1, x2, x3
-mul		x4, x5, x6
-mul		x7, x8, x9
+mul     x1, x2, x3
+mul     x4, x5, x6
+mul     x7, x8, x9
 ```
 ]
 
@@ -198,6 +198,8 @@ mul     x5, x5, x6      # multi-cycle operations
 ```
 
 -   But these slow operations don't have dependency with each other
+    -   Therefore we can issue `mul` while waiting for the first `ld`
+    -   But commit in order
 
 ---
 
@@ -444,6 +446,18 @@ class: middle, center
 
 ## Cache coherence
 
+### What is the problem?
+
+-   2 CPUs are trying to access to the same memory address
+    -   Both of them have cache
+-   CPU-0 read, modify; then CPU-1 read, modify
+    -   With cache, CPU-1 won't read the latest data that CPU-0 produced
+    -   Because the lasted copy is in CPU-0's cache
+
+---
+
+## Cache coherence (cont'd)
+
 ### Software vs. hardware
 
 -   Software managed coherency
@@ -459,7 +473,7 @@ class: middle, center
 
 ---
 
-## Cache coherence
+## Cache coherence (cont'd)
 
 .col-8[
 

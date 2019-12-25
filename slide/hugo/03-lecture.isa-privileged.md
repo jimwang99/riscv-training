@@ -82,7 +82,7 @@ Debug (non-functional mode) is slightly higher than machine model, but need phys
 ## Privilege modes / M (machine)
 
 -   The highest / only-mandatory privilege mode
--   The level that has directly access hardware, right after reset
+-   The level that can directly access hardware, right after reset
 
 ### Machine mode CSRs
 
@@ -117,8 +117,8 @@ Debug (non-functional mode) is slightly higher than machine model, but need phys
 -   Paged virtual memory
     -   Divide virtual address space into pages, e.g. 4KiB
     -   Still cannot do 1-to-1 translation, too many entries (4GiB/4KiB = 1Mi)
--   Levels of page tables
-    -   Example of 3-level page tables
+-   Hierarchical page tables
+    -   Example of 3-level page tables as shown
 
 ![pic](../image/virtual-memory-page-table.png)
 
@@ -297,6 +297,7 @@ Attributes can be programmable
 
 -   `xI/EDELEG`: trap deligation registers
     -   By default, trap into machine mode, but use deligation registers, other modes can be delegated for certain types of trap
+    -   User-level interrupt: improve interrupt handler's turn-around-time
 
 ### Reason to trap
 
