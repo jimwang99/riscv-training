@@ -23,14 +23,14 @@ asm-correct:
 
 gcc-wrong:
 	make custom-inst-gcc RISCV=/opt/FreedomStudio-2019-08-2-lin64/SiFive/riscv64-unknown-elf-gcc-8.3.0-2019.08.0
-	-mkdir wrong
+	mkdir -p wrong
 	mv custom-inst-gcc.elf wrong
 	mv custom-inst-gcc.elf.dump wrong
 	mv custom-inst-gcc.spike.log wrong
 
 gcc-correct:
 	make custom-inst-gcc RISCV=/opt/riscv/rv64i-custom
-	-mkdir correct
+	-mkdir -p correct
 	mv custom-inst-gcc.elf correct
 	mv custom-inst-gcc.elf.dump correct
 	mv custom-inst-gcc.spike.log correct

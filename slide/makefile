@@ -3,7 +3,7 @@ SHELL=/bin/bash
 default: preproc
 .PHONY: default
 
-bs = /Users/jimw/node_modules/backslide/bin/bs
+bs = ~/node_modules/backslide/bin/bs
 
 ################################################################
 

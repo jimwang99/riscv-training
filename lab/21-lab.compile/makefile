@@ -1,4 +1,5 @@
 default: asm c
+
 asm:
 	make example-asm.elf SRC_TYPE=asm
 	make example-asm.elf.dump

@@ -18,5 +18,5 @@ endif
 .PRECIOUS: %.elf
 
 clean:
-	-rm -rf *.o *.elf *.elf.dump
+	-rm -rf *.o *.elf *.elf.dump *.spike.log *.trace.gz
 .PHONY: clean

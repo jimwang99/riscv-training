@@ -1,0 +1,98 @@
+
+example-asm.elf:     file format elf64-littleriscv
+
+
+Disassembly of section .text:
+
+0000000000010000 <_start>:
+   10000:	ffef51b7          	lui	gp,0xffef5
+   10004:	6df1819b          	addiw	gp,gp,1759
+   10008:	00c19193          	slli	gp,gp,0xc
+   1000c:	77f18193          	addi	gp,gp,1919 # ffffffffffef577f <stack+0xffffffffffee54bf>
+   10010:	00f19193          	slli	gp,gp,0xf
+   10014:	ab718193          	addi	gp,gp,-1353
+   10018:	00e19193          	slli	gp,gp,0xe
+   1001c:	eef18193          	addi	gp,gp,-273
+   10020:	07c0006f          	j	1009c <_main>
+
+0000000000010024 <_mac>:
+   10024:	02c582b3          	mul	t0,a1,a2
+   10028:	00550533          	add	a0,a0,t0
+   1002c:	00008067          	ret
+
+0000000000010030 <_vmul>:
+   10030:	fd810113          	addi	sp,sp,-40
+   10034:	00113023          	sd	ra,0(sp)
+   10038:	00813423          	sd	s0,8(sp)
+   1003c:	00913823          	sd	s1,16(sp)
+   10040:	01213c23          	sd	s2,24(sp)
+   10044:	03313023          	sd	s3,32(sp)
+   10048:	03413423          	sd	s4,40(sp)
+   1004c:	00050413          	mv	s0,a0
+   10050:	00058493          	mv	s1,a1
+   10054:	00060913          	mv	s2,a2
+   10058:	00050993          	mv	s3,a0
+   1005c:	00000513          	li	a0,0
+
+0000000000010060 <__vmul_mac>:
+   10060:	0004c583          	lbu	a1,0(s1)
+   10064:	00094603          	lbu	a2,0(s2)
+   10068:	fbdff0ef          	jal	ra,10024 <_mac>
+   1006c:	00148493          	addi	s1,s1,1
+   10070:	01390933          	add	s2,s2,s3
+   10074:	fff40413          	addi	s0,s0,-1
+   10078:	fe0414e3          	bnez	s0,10060 <__vmul_mac>
+   1007c:	02813a03          	ld	s4,40(sp)
+   10080:	02013983          	ld	s3,32(sp)
+   10084:	01813903          	ld	s2,24(sp)
+   10088:	01013483          	ld	s1,16(sp)
+   1008c:	00813403          	ld	s0,8(sp)
+   10090:	00013083          	ld	ra,0(sp)
+   10094:	02810113          	addi	sp,sp,40
+   10098:	00008067          	ret
+
+000000000001009c <_main>:
+   1009c:	00000117          	auipc	sp,0x0
+   100a0:	22410113          	addi	sp,sp,548 # 102c0 <stack>
+   100a4:	00000997          	auipc	s3,0x0
+   100a8:	09c9b983          	ld	s3,156(s3) # 10140 <byte_matrix_row>
+   100ac:	00000a17          	auipc	s4,0x0
+   100b0:	09ca3a03          	ld	s4,156(s4) # 10148 <byte_matrix_col>
+   100b4:	00000413          	li	s0,0
+   100b8:	00000493          	li	s1,0
+   100bc:	00000913          	li	s2,0
+
+00000000000100c0 <__mmul_col>:
+   100c0:	000a0513          	mv	a0,s4
+   100c4:	00000597          	auipc	a1,0x0
+   100c8:	08c58593          	addi	a1,a1,140 # 10150 <byte_matrix_a>
+   100cc:	00000617          	auipc	a2,0x0
+   100d0:	09460613          	addi	a2,a2,148 # 10160 <byte_matrix_b>
+   100d4:	034482b3          	mul	t0,s1,s4
+   100d8:	005585b3          	add	a1,a1,t0
+   100dc:	01260633          	add	a2,a2,s2
+   100e0:	f51ff0ef          	jal	ra,10030 <_vmul>
+
+00000000000100e4 <_compare>:
+   100e4:	00000297          	auipc	t0,0x0
+   100e8:	08c28293          	addi	t0,t0,140 # 10170 <ref_result>
+   100ec:	008282b3          	add	t0,t0,s0
+   100f0:	0002e303          	lwu	t1,0(t0)
+   100f4:	00a341b3          	xor	gp,t1,a0
+   100f8:	00019e63          	bnez	gp,10114 <_exit>
+   100fc:	00440413          	addi	s0,s0,4
+   10100:	00190913          	addi	s2,s2,1
+   10104:	fb494ee3          	blt	s2,s4,100c0 <__mmul_col>
+   10108:	00148493          	addi	s1,s1,1
+   1010c:	00000913          	li	s2,0
+   10110:	fb34c8e3          	blt	s1,s3,100c0 <__mmul_col>
+
+0000000000010114 <_exit>:
+   10114:	00000513          	li	a0,0
+   10118:	00000593          	li	a1,0
+   1011c:	00000613          	li	a2,0
+   10120:	00000693          	li	a3,0
+   10124:	00000713          	li	a4,0
+   10128:	00000793          	li	a5,0
+   1012c:	05d00893          	li	a7,93
+   10130:	00000073          	ecall
